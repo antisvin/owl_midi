@@ -30,11 +30,8 @@ jobs:
                 args: --all --no-deps
 
             - name: Deploy Documentation
-              env:
-                ACTIONS_DEPLOY_KEY: ${{ secrets.GITHUB_TOKEN }}
-                PUBLISH_BRANCH: gh-pages
-                PUBLISH_DIR: ./target/doc
-                SCRIPT_MODE: true
-              run: |
-                wget https://raw.githubusercontent.com/peaceiris/actions-gh-pages/v3.8.0/entrypoint.sh
-                bash ./entrypoint.sh 
+              uses: peaceiris/actions-gh-pages@v3.8
+              if: ${{ github.ref == 'refs/heads/master' }}
+              with:
+                github_token: ${{ secrets.GITHUB_TOKEN }}
+                publish_dir: ./target/doc
