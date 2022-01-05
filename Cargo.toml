@@ -2,7 +2,7 @@
 name = "owl_midi"
 version = "0.1.0"
 edition = "2021"
-license = "GPLv2"
+license = "GPL-2.0-or-later"
 license-file = "LICENSE"
 description = "Bindings for OWL firmware FFI"
 repository = "https://github.com/antisvin/owl_midi"
