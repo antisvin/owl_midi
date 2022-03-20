@@ -14,7 +14,7 @@ fn main() {
         // bindings for.
         .header("OpenWareMidiControl.h")
         .prepend_enum_name(false)        
-        .fit_macro_constants(true)
+//        .fit_macro_constants(true)
         .rustified_enum("PatchButtonId")
         .rustified_enum("PatchParameterId")
         .rustified_enum("OpenWareMidiControl")
@@ -38,7 +38,7 @@ fn main() {
         // bindings for.
         .header("MidiStatus.h")
         .prepend_enum_name(false)  
-        .translate_enum_integer_types(true)
+//        .translate_enum_integer_types(true)
         .newtype_enum("MidiStatus")
         .newtype_enum("MidiControlChange")
         .newtype_enum("UsbMidi")
