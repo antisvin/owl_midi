@@ -1,6 +1,6 @@
 [package]
 name = "owl_midi"
-version = "0.2.1"
+version = "0.2.2"
 edition = "2021"
 license = "GPL-2.0-or-later"
 description = "Bindings for OWL firmware FFI"
@@ -12,4 +12,4 @@ keywords = ["ffi", "midi"]
 [dependencies]
 
 [build-dependencies]
-bindgen = "0.59.2"
+bindgen = "0.54.0"
