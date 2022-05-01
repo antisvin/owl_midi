@@ -23,6 +23,7 @@ pub const SYSEX_CONFIGURATION_MIDI_OUTPUT_CHANNEL: &'static [u8; 3usize] = b"MO\
 pub const SYSEX_CONFIGURATION_BUS_ENABLE: &'static [u8; 3usize] = b"BE\0";
 pub const SYSEX_CONFIGURATION_BUS_FORWARD_MIDI: &'static [u8; 3usize] = b"BM\0";
 pub const SYSEX_CONFIGURATION_BOOTLOADER_LOCK: &'static [u8; 3usize] = b"BL\0";
+pub const SYSEX_CONFIGURATION_EXPRESSION_PEDAL: &'static [u8; 3usize] = b"EP\0";
 #[repr(u32)]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, Hash)]
 pub enum PatchParameterId {

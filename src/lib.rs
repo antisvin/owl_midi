@@ -19,7 +19,7 @@ macro_rules! sysex_config {
     };
 }
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Debug)]
 pub enum SysexConfiguration {
     AudioBitdepth     = sysex_config!(SYSEX_CONFIGURATION_AUDIO_BITDEPTH),
     AudioBlocksize    = sysex_config!(SYSEX_CONFIGURATION_AUDIO_BLOCKSIZE),
@@ -33,6 +33,7 @@ pub enum SysexConfiguration {
     CodecInputGain    = sysex_config!(SYSEX_CONFIGURATION_CODEC_INPUT_GAIN),
     CodecOutputGain   = sysex_config!(SYSEX_CONFIGURATION_CODEC_OUTPUT_GAIN),
     CodecSwap         = sysex_config!(SYSEX_CONFIGURATION_CODEC_SWAP),
+    ExpressionPedal   = sysex_config!(SYSEX_CONFIGURATION_EXPRESSION_PEDAL),
     InputOffset       = sysex_config!(SYSEX_CONFIGURATION_INPUT_OFFSET),
     InputScalar       = sysex_config!(SYSEX_CONFIGURATION_INPUT_SCALAR),
     MIDIInputChannel  = sysex_config!(SYSEX_CONFIGURATION_MIDI_INPUT_CHANNEL),
@@ -42,6 +43,28 @@ pub enum SysexConfiguration {
     PCButton          = sysex_config!(SYSEX_CONFIGURATION_PC_BUTTON),
 }
 
+pub const SYSEX_CONFIGURATIONS: [SysexConfiguration; 20] = [
+    SysexConfiguration::AudioBitdepth,
+    SysexConfiguration::AudioBlocksize,
+    SysexConfiguration::AudioDataformat,
+    SysexConfiguration::AudioRate,
+    SysexConfiguration::BootloaderLock,
+    SysexConfiguration::BusEnable,
+    SysexConfiguration::BusForwardMIDI,
+    SysexConfiguration::CodecBypass,
+    SysexConfiguration::CodecHipass,
+    SysexConfiguration::CodecInputGain,
+    SysexConfiguration::CodecOutputGain,
+    SysexConfiguration::CodecSwap,
+    SysexConfiguration::ExpressionPedal,
+    SysexConfiguration::InputOffset,
+    SysexConfiguration::InputScalar,
+    SysexConfiguration::MIDIInputChannel,
+    SysexConfiguration::MIDIOutputChannel,
+    SysexConfiguration::OutputOffset,
+    SysexConfiguration::OutputScalar,
+    SysexConfiguration::PCButton,
+];
 
 #[cfg(test)]
 mod tests {
@@ -50,5 +73,9 @@ mod tests {
     #[test]
     fn test_sysex_config() {
         assert_eq!(SysexConfiguration::AudioRate as isize, 0x4653);
+    }
+    #[test]
+    fn test_sysex_configs_list() {
+        assert_eq!(SysexConfiguration::AudioRate, SYSEX_CONFIGURATIONS[3]);
     }
 }
