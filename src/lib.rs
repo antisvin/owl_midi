@@ -21,7 +21,7 @@ macro_rules! sysex_config {
     };
 }
 
-#[derive(PartialEq, Debug, FromPrimitive)]
+#[derive(Eq, PartialEq, Hash, Clone, Copy, Debug, FromPrimitive)]
 pub enum SysexConfiguration {
     AudioBitdepth = sysex_config!(SYSEX_CONFIGURATION_AUDIO_BITDEPTH),
     AudioBlocksize = sysex_config!(SYSEX_CONFIGURATION_AUDIO_BLOCKSIZE),
