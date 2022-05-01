@@ -129,7 +129,7 @@ pub const SYSEX_CONFIGURATIONS: [&amp;&#39;static [u8; 3usize]; 1] =[
     };
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">PartialEq</span>, <span class="ident">Debug</span>, <span class="ident">FromPrimitive</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Eq</span>, <span class="ident">PartialEq</span>, <span class="ident">Hash</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">FromPrimitive</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SysexConfiguration</span> {
     <span class="ident">AudioBitdepth</span> <span class="op">=</span> <span class="macro">sysex_config!</span>(<span class="ident">SYSEX_CONFIGURATION_AUDIO_BITDEPTH</span>),
     <span class="ident">AudioBlocksize</span> <span class="op">=</span> <span class="macro">sysex_config!</span>(<span class="ident">SYSEX_CONFIGURATION_AUDIO_BLOCKSIZE</span>),
