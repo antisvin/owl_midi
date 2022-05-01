@@ -12,9 +12,11 @@ fn main() {
     let bindings = bindgen::Builder::default()
         // The input header we would like to generate
         // bindings for.
+        .use_core()
+        .ctypes_prefix("cty")
         .header("OpenWareMidiControl.h")
-        .prepend_enum_name(false)        
-//        .fit_macro_constants(true)
+        .prepend_enum_name(false)
+        //        .fit_macro_constants(true)
         .rustified_enum("PatchButtonId")
         .rustified_enum("PatchParameterId")
         .rustified_enum("OpenWareMidiControl")
@@ -36,9 +38,11 @@ fn main() {
     let status = bindgen::Builder::default()
         // The input header we would like to generate
         // bindings for.
+        .use_core()
+        .ctypes_prefix("cty")
         .header("MidiStatus.h")
-        .prepend_enum_name(false)  
-//        .translate_enum_integer_types(true)
+        .prepend_enum_name(false)
+        //        .translate_enum_integer_types(true)
         .newtype_enum("MidiStatus")
         .newtype_enum("MidiControlChange")
         .newtype_enum("UsbMidi")

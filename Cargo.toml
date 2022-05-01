@@ -13,6 +13,7 @@ keywords = ["ffi", "midi"]
 num = "0.4"
 num-derive = {version="^0.3", features=["full-syntax"]}
 num-traits = "0.2"
+cty = "0.2.2"
 
 [build-dependencies]
-bindgen = "0.54.0"
+bindgen = "0.59.2"
