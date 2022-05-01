@@ -6,11 +6,49 @@
 include!("bindings.rs");
 include!("status.rs");
 
+/*
+pub const SYSEX_CONFIGURATIONS: [&'static [u8; 3usize]; 1] =[
+    SYSEX_CONFIGURATION_AUDIO_RATE,
+    ];
+     */
+
+#[macro_export]
+macro_rules! sysex_config {
+    ( $x:expr ) => {
+        ($x[0] as isize) << 8 | ($x[1] as isize)
+    };
+}
+
+#[derive(PartialEq)]
+pub enum SysexConfiguration {
+    AudioBitdepth     = sysex_config!(SYSEX_CONFIGURATION_AUDIO_BITDEPTH),
+    AudioBlocksize    = sysex_config!(SYSEX_CONFIGURATION_AUDIO_BLOCKSIZE),
+    AudioDataformat   = sysex_config!(SYSEX_CONFIGURATION_AUDIO_DATAFORMAT),
+    AudioRate         = sysex_config!(SYSEX_CONFIGURATION_AUDIO_RATE),
+    BootloaderLock    = sysex_config!(SYSEX_CONFIGURATION_BOOTLOADER_LOCK),
+    BusEnable         = sysex_config!(SYSEX_CONFIGURATION_BUS_ENABLE),
+    BusForwardMIDI    = sysex_config!(SYSEX_CONFIGURATION_BUS_FORWARD_MIDI),
+    CodecBypass       = sysex_config!(SYSEX_CONFIGURATION_CODEC_BYPASS),
+    CodecHipass       = sysex_config!(SYSEX_CONFIGURATION_CODEC_HIGHPASS),
+    CodecInputGain    = sysex_config!(SYSEX_CONFIGURATION_CODEC_INPUT_GAIN),
+    CodecOutputGain   = sysex_config!(SYSEX_CONFIGURATION_CODEC_OUTPUT_GAIN),
+    CodecSwap         = sysex_config!(SYSEX_CONFIGURATION_CODEC_SWAP),
+    InputOffset       = sysex_config!(SYSEX_CONFIGURATION_INPUT_OFFSET),
+    InputScalar       = sysex_config!(SYSEX_CONFIGURATION_INPUT_SCALAR),
+    MIDIInputChannel  = sysex_config!(SYSEX_CONFIGURATION_MIDI_INPUT_CHANNEL),
+    MIDIOutputChannel = sysex_config!(SYSEX_CONFIGURATION_MIDI_OUTPUT_CHANNEL),
+    OutputOffset      = sysex_config!(SYSEX_CONFIGURATION_OUTPUT_OFFSET),
+    OutputScalar      = sysex_config!(SYSEX_CONFIGURATION_OUTPUT_SCALAR),
+    PCButton          = sysex_config!(SYSEX_CONFIGURATION_PC_BUTTON),
+}
+
+
 #[cfg(test)]
 mod tests {
+    use crate::*;
+
     #[test]
-    fn it_works() {
-        let result = 2 + 2;
-        assert_eq!(result, 4);
+    fn test_sysex_config() {
+        assert_eq!(SysexConfiguration::AudioRate as isize, 0x4653);
     }
 }
