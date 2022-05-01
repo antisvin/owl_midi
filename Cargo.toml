@@ -1,6 +1,6 @@
 [package]
 name = "owl_midi"
-version = "0.3.1"
+version = "0.3.2"
 edition = "2021"
 license = "GPL-2.0-or-later"
 description = "Bindings for OWL firmware FFI"
@@ -10,6 +10,9 @@ keywords = ["ffi", "midi"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+num = "0.4"
+num-derive = {version="^0.3", features=["full-syntax"]}
+num-traits = "0.2"
 
 [build-dependencies]
 bindgen = "0.54.0"

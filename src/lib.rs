@@ -12,6 +12,8 @@ pub const SYSEX_CONFIGURATIONS: [&'static [u8; 3usize]; 1] =[
     ];
      */
 
+use num_derive::FromPrimitive;
+
 #[macro_export]
 macro_rules! sysex_config {
     ( $x:expr ) => {
@@ -19,7 +21,7 @@ macro_rules! sysex_config {
     };
 }
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, FromPrimitive)]
 pub enum SysexConfiguration {
     AudioBitdepth     = sysex_config!(SYSEX_CONFIGURATION_AUDIO_BITDEPTH),
     AudioBlocksize    = sysex_config!(SYSEX_CONFIGURATION_AUDIO_BLOCKSIZE),
@@ -41,6 +43,12 @@ pub enum SysexConfiguration {
     OutputOffset      = sysex_config!(SYSEX_CONFIGURATION_OUTPUT_OFFSET),
     OutputScalar      = sysex_config!(SYSEX_CONFIGURATION_OUTPUT_SCALAR),
     PCButton          = sysex_config!(SYSEX_CONFIGURATION_PC_BUTTON),
+}
+
+impl From<isize> for SysexConfiguration {
+    fn from(value: isize) -> Self {
+        num_traits::FromPrimitive::from_isize(value).unwrap()
+    }
 }
 
 pub const SYSEX_CONFIGURATIONS: [SysexConfiguration; 20] = [
@@ -74,6 +82,14 @@ mod tests {
     fn test_sysex_config() {
         assert_eq!(SysexConfiguration::AudioRate as isize, 0x4653);
     }
+    #[test]
+    fn test_sysex_config_from_isize() {
+        assert_eq!(num_traits::FromPrimitive::from_isize(0x4653), Some(SysexConfiguration::AudioRate));
+    }
+    #[test]
+    fn test_sysex_config_from_method() {
+        assert_eq!(SysexConfiguration::from(0x4653), SysexConfiguration::AudioRate);
+    }    
     #[test]
     fn test_sysex_configs_list() {
         assert_eq!(SysexConfiguration::AudioRate, SYSEX_CONFIGURATIONS[3]);
