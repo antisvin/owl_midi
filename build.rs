@@ -2,6 +2,24 @@ extern crate bindgen;
 
 use std::path::PathBuf;
 
+#[derive(Debug)]
+struct MyCallback;
+impl core::panic::UnwindSafe for MyCallback {}
+
+impl bindgen::callbacks::ParseCallbacks for MyCallback {
+    fn add_derives(&self, name: &str) -> Vec<String> {
+        if name == "PatchParameterId"
+            || name == "PatchButtonId"
+            || name == "OpenWareMidiSysexCommand"
+            || name == "OpenWareMidiControl"
+        {
+            vec!["FromPrimitive".to_string()]
+        } else {
+            vec![]
+        }
+    }
+}
+
 fn main() {
     // Tell cargo to invalidate the built crate whenever the wrapper changes
     println!("cargo:rerun-if-changed=OpenWareMidiControl.h");
@@ -24,6 +42,7 @@ fn main() {
         // Tell cargo to invalidate the built crate whenever any of the
         // included header files changed.
         .parse_callbacks(Box::new(bindgen::CargoCallbacks))
+        .parse_callbacks(Box::new(MyCallback))
         // Finish the builder and generate the bindings.
         .generate()
         // Unwrap the Result and panic on failure.

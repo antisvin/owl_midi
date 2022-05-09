@@ -3,16 +3,10 @@
 #![allow(non_camel_case_types)]
 #![allow(non_snake_case)]
 
+use num_derive::FromPrimitive;
+
 include!("bindings.rs");
 include!("status.rs");
-
-/*
-pub const SYSEX_CONFIGURATIONS: [&'static [u8; 3usize]; 1] =[
-    SYSEX_CONFIGURATION_AUDIO_RATE,
-    ];
-     */
-
-use num_derive::FromPrimitive;
 
 #[macro_export]
 macro_rules! sysex_config {
@@ -74,6 +68,30 @@ pub const SYSEX_CONFIGURATIONS: [SysexConfiguration; 20] = [
     SysexConfiguration::PCButton,
 ];
 
+impl From<isize> for PatchButtonId {
+    fn from(value: isize) -> Self {
+        num_traits::FromPrimitive::from_isize(value).unwrap()
+    }
+}
+
+impl From<isize> for PatchParameterId {
+    fn from(value: isize) -> Self {
+        num_traits::FromPrimitive::from_isize(value).unwrap()
+    }
+}
+
+impl From<isize> for OpenWareMidiSysexCommand {
+    fn from(value: isize) -> Self {
+        num_traits::FromPrimitive::from_isize(value).unwrap()
+    }
+}
+
+impl From<isize> for OpenWareMidiControl {
+    fn from(value: isize) -> Self {
+        num_traits::FromPrimitive::from_isize(value).unwrap()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use crate::*;
@@ -99,5 +117,37 @@ mod tests {
     #[test]
     fn test_sysex_configs_list() {
         assert_eq!(SysexConfiguration::AudioRate, SYSEX_CONFIGURATIONS[3]);
+    }
+    #[test]
+    fn test_parameter_id() {
+        assert_eq!(PatchParameterId::PARAMETER_AA as u8, 8);
+        assert_eq!(
+            PatchParameterId::try_from(8).unwrap(),
+            PatchParameterId::PARAMETER_AA
+        );
+    }
+    #[test]
+    fn test_button_id() {
+        assert_eq!(PatchButtonId::BUTTON_1 as u8, 4);
+        assert_eq!(PatchButtonId::try_from(4).unwrap(), PatchButtonId::BUTTON_1);
+    }
+    #[test]
+    fn test_sysex_midi_command() {
+        assert_eq!(
+            OpenWareMidiSysexCommand::SYSEX_PARAMETER_NAME_COMMAND as u8,
+            2
+        );
+        assert_eq!(
+            OpenWareMidiSysexCommand::try_from(2).unwrap(),
+            OpenWareMidiSysexCommand::SYSEX_PARAMETER_NAME_COMMAND
+        );
+    }
+    #[test]
+    fn test_midi_control() {
+        assert_eq!(OpenWareMidiControl::LED as u8, 30);
+        assert_eq!(
+            OpenWareMidiControl::try_from(30).unwrap(),
+            OpenWareMidiControl::LED
+        );
     }
 }

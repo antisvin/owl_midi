@@ -25,7 +25,7 @@ pub const SYSEX_CONFIGURATION_BUS_FORWARD_MIDI: &[u8; 3usize] = b"BM\0";
 pub const SYSEX_CONFIGURATION_BOOTLOADER_LOCK: &[u8; 3usize] = b"BL\0";
 pub const SYSEX_CONFIGURATION_EXPRESSION_PEDAL: &[u8; 3usize] = b"EP\0";
 #[repr(u32)]
-#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq, FromPrimitive)]
 pub enum PatchParameterId {
     PARAMETER_A = 0,
     PARAMETER_B = 1,
@@ -69,7 +69,7 @@ pub enum PatchParameterId {
     PARAMETER_DH = 39,
 }
 #[repr(u32)]
-#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq, FromPrimitive)]
 pub enum PatchButtonId {
     PUSHBUTTON = 1,
     GREEN_BUTTON = 2,
@@ -84,7 +84,7 @@ pub enum PatchButtonId {
     BUTTON_8 = 11,
 }
 #[repr(u32)]
-#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq, FromPrimitive)]
 pub enum OpenWareMidiSysexCommand {
     SYSEX_PRESET_NAME_COMMAND = 1,
     SYSEX_PARAMETER_NAME_COMMAND = 2,
@@ -110,7 +110,7 @@ pub enum OpenWareMidiSysexCommand {
     SYSEX_PROGRAM_ERROR = 48,
 }
 #[repr(u32)]
-#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq)]
+#[derive(Debug, Copy, Clone, Hash, PartialEq, Eq, FromPrimitive)]
 pub enum OpenWareMidiControl {
     PATCH_PARAMETER_A = 20,
     PATCH_PARAMETER_B = 21,
