@@ -67,10 +67,29 @@ pub const SYSEX_CONFIGURATIONS: [SysexConfiguration; 20] = [
     SysexConfiguration::OutputScalar,
     SysexConfiguration::PCButton,
 ];
+const BUTTON_STRING_IDS: [&str; 11] = [
+    "Push", "Green", "Red", "B1", "B2", "B3", "B4", "B5", "B6", "B7", "B8",
+];
+impl PatchButtonId {
+    pub fn string_id(&self) -> &str {
+        BUTTON_STRING_IDS[usize::from(*self as u8 - 1)]
+    }
+}
 
 impl From<isize> for PatchButtonId {
     fn from(value: isize) -> Self {
         num_traits::FromPrimitive::from_isize(value).unwrap()
+    }
+}
+
+const PARAMETER_STRING_IDS: [&str; 40] = [
+    "A", "B", "C", "D", "E", "F", "G", "H", "AA", "AB", "AC", "AD", "AE", "AF", "AG", "AH", "BA",
+    "BB", "BC", "BD", "BE", "BF", "BG", "BH", "CA", "CB", "CC", "CD", "CE", "CF", "CG", "CH", "DA",
+    "DB", "DC", "DD", "DE", "DF", "DG", "DH",
+];
+impl PatchParameterId {
+    pub fn string_id(&self) -> &str {
+        PARAMETER_STRING_IDS[usize::from(*self as u8)]
     }
 }
 
@@ -125,11 +144,13 @@ mod tests {
             PatchParameterId::try_from(8).unwrap(),
             PatchParameterId::PARAMETER_AA
         );
+        assert_eq!(PatchParameterId::PARAMETER_AA.string_id(), "AA");
     }
     #[test]
     fn test_button_id() {
         assert_eq!(PatchButtonId::BUTTON_1 as u8, 4);
         assert_eq!(PatchButtonId::try_from(4).unwrap(), PatchButtonId::BUTTON_1);
+        assert_eq!(PatchButtonId::BUTTON_1.string_id(), "B1");
     }
     #[test]
     fn test_sysex_midi_command() {
