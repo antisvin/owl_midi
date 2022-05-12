@@ -177,6 +177,59 @@
 <span id="172">172</span>
 <span id="173">173</span>
 <span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">no_std</span>]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
@@ -290,6 +343,55 @@
     }
 }
 
+<span class="kw">const</span> <span class="ident">PARAMETER_CC_LIST</span>: [<span class="ident">OpenWareMidiControl</span>; <span class="number">40</span>] <span class="op">=</span> [
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_A</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_B</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_C</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_D</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_E</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_F</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_G</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_H</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_AA</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_AB</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_AC</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_AD</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_AE</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_AF</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_AG</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_AH</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_BA</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_BB</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_BC</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_BD</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_BE</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_BF</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_BG</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_BH</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_CA</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_CB</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_CC</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_CD</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_CE</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_CF</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_CG</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_CH</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_DA</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_DB</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_DC</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_DD</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_DE</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_DF</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_DG</span>,
+    <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_DH</span>,
+];
+
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">PatchParameterId</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OpenWareMidiControl</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">pid</span>: <span class="ident">PatchParameterId</span>) -&gt; <span class="self">Self</span> {
+        <span class="ident">PARAMETER_CC_LIST</span>[<span class="ident">usize::from</span>(<span class="ident">pid</span> <span class="kw">as</span> <span class="ident">u8</span>)]
+    }
+}
+
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
@@ -348,6 +450,10 @@
         <span class="macro">assert_eq!</span>(
             <span class="ident">OpenWareMidiControl::try_from</span>(<span class="number">30</span>).<span class="ident">unwrap</span>(),
             <span class="ident">OpenWareMidiControl::LED</span>
+        );
+        <span class="macro">assert_eq!</span>(
+            <span class="ident">OpenWareMidiControl::from</span>(<span class="ident">PatchParameterId::PARAMETER_AA</span>),
+            <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_AA</span>
         );
     }
 }
