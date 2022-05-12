@@ -111,6 +111,55 @@ impl From<isize> for OpenWareMidiControl {
     }
 }
 
+const PARAMETER_CC_LIST: [OpenWareMidiControl; 40] = [
+    OpenWareMidiControl::PATCH_PARAMETER_A,
+    OpenWareMidiControl::PATCH_PARAMETER_B,
+    OpenWareMidiControl::PATCH_PARAMETER_C,
+    OpenWareMidiControl::PATCH_PARAMETER_D,
+    OpenWareMidiControl::PATCH_PARAMETER_E,
+    OpenWareMidiControl::PATCH_PARAMETER_F,
+    OpenWareMidiControl::PATCH_PARAMETER_G,
+    OpenWareMidiControl::PATCH_PARAMETER_H,
+    OpenWareMidiControl::PATCH_PARAMETER_AA,
+    OpenWareMidiControl::PATCH_PARAMETER_AB,
+    OpenWareMidiControl::PATCH_PARAMETER_AC,
+    OpenWareMidiControl::PATCH_PARAMETER_AD,
+    OpenWareMidiControl::PATCH_PARAMETER_AE,
+    OpenWareMidiControl::PATCH_PARAMETER_AF,
+    OpenWareMidiControl::PATCH_PARAMETER_AG,
+    OpenWareMidiControl::PATCH_PARAMETER_AH,
+    OpenWareMidiControl::PATCH_PARAMETER_BA,
+    OpenWareMidiControl::PATCH_PARAMETER_BB,
+    OpenWareMidiControl::PATCH_PARAMETER_BC,
+    OpenWareMidiControl::PATCH_PARAMETER_BD,
+    OpenWareMidiControl::PATCH_PARAMETER_BE,
+    OpenWareMidiControl::PATCH_PARAMETER_BF,
+    OpenWareMidiControl::PATCH_PARAMETER_BG,
+    OpenWareMidiControl::PATCH_PARAMETER_BH,
+    OpenWareMidiControl::PATCH_PARAMETER_CA,
+    OpenWareMidiControl::PATCH_PARAMETER_CB,
+    OpenWareMidiControl::PATCH_PARAMETER_CC,
+    OpenWareMidiControl::PATCH_PARAMETER_CD,
+    OpenWareMidiControl::PATCH_PARAMETER_CE,
+    OpenWareMidiControl::PATCH_PARAMETER_CF,
+    OpenWareMidiControl::PATCH_PARAMETER_CG,
+    OpenWareMidiControl::PATCH_PARAMETER_CH,
+    OpenWareMidiControl::PATCH_PARAMETER_DA,
+    OpenWareMidiControl::PATCH_PARAMETER_DB,
+    OpenWareMidiControl::PATCH_PARAMETER_DC,
+    OpenWareMidiControl::PATCH_PARAMETER_DD,
+    OpenWareMidiControl::PATCH_PARAMETER_DE,
+    OpenWareMidiControl::PATCH_PARAMETER_DF,
+    OpenWareMidiControl::PATCH_PARAMETER_DG,
+    OpenWareMidiControl::PATCH_PARAMETER_DH,
+];
+
+impl From<PatchParameterId> for OpenWareMidiControl {
+    fn from(pid: PatchParameterId) -> Self {
+        PARAMETER_CC_LIST[usize::from(pid as u8)]
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use crate::*;
@@ -169,6 +218,10 @@ mod tests {
         assert_eq!(
             OpenWareMidiControl::try_from(30).unwrap(),
             OpenWareMidiControl::LED
+        );
+        assert_eq!(
+            OpenWareMidiControl::from(PatchParameterId::PARAMETER_AA),
+            OpenWareMidiControl::PATCH_PARAMETER_AA
         );
     }
 }
