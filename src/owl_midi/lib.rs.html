@@ -280,6 +280,9 @@
 <span id="275">275</span>
 <span id="276">276</span>
 <span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">no_std</span>]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span>
 <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
@@ -387,9 +390,11 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">isize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OpenWareMidiControl</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">isize</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">num_traits::FromPrimitive::from_isize</span>(<span class="ident">value</span>).<span class="ident">unwrap</span>()
+<span class="kw">impl</span> <span class="ident">TryFrom</span><span class="op">&lt;</span><span class="ident">isize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OpenWareMidiControl</span> {
+    <span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>;
+
+    <span class="kw">fn</span> <span class="ident">try_from</span>(<span class="ident">value</span>: <span class="ident">isize</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span> {
+        <span class="ident">num_traits::FromPrimitive::from_isize</span>(<span class="ident">value</span>).<span class="ident">ok_or</span>(<span class="string">&quot;Unknown CC&quot;</span>)
     }
 }
 
@@ -551,6 +556,7 @@
             <span class="ident">OpenWareMidiControl::try_from</span>(<span class="number">30</span>).<span class="ident">unwrap</span>(),
             <span class="ident">OpenWareMidiControl::LED</span>
         );
+        <span class="macro">assert_eq!</span>(<span class="ident">OpenWareMidiControl::try_from</span>(<span class="number">111</span>), <span class="prelude-val">Err</span>(<span class="string">&quot;Unknown CC&quot;</span>));
         <span class="macro">assert_eq!</span>(
             <span class="ident">OpenWareMidiControl::from</span>(<span class="ident">PatchParameterId::PARAMETER_AA</span>),
             <span class="ident">OpenWareMidiControl::PATCH_PARAMETER_AA</span>
