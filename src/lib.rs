@@ -105,9 +105,11 @@ impl From<isize> for OpenWareMidiSysexCommand {
     }
 }
 
-impl From<isize> for OpenWareMidiControl {
-    fn from(value: isize) -> Self {
-        num_traits::FromPrimitive::from_isize(value).unwrap()
+impl TryFrom<isize> for OpenWareMidiControl {
+    type Error = &'static str;
+
+    fn try_from(value: isize) -> Result<Self, Self::Error> {
+        num_traits::FromPrimitive::from_isize(value).ok_or("Unknown CC")
     }
 }
 
@@ -269,6 +271,7 @@ mod tests {
             OpenWareMidiControl::try_from(30).unwrap(),
             OpenWareMidiControl::LED
         );
+        assert_eq!(OpenWareMidiControl::try_from(111), Err("Unknown CC"));
         assert_eq!(
             OpenWareMidiControl::from(PatchParameterId::PARAMETER_AA),
             OpenWareMidiControl::PATCH_PARAMETER_AA
