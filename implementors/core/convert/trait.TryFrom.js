@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["owl_midi"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/1.60.0/core/convert/trait.TryFrom.html\" title=\"trait core::convert::TryFrom\">TryFrom</a>&lt;<a class=\"enum\" href=\"owl_midi/enum.OpenWareMidiControl.html\" title=\"enum owl_midi::OpenWareMidiControl\">OpenWareMidiControl</a>&gt; for <a class=\"enum\" href=\"owl_midi/enum.PatchParameterId.html\" title=\"enum owl_midi::PatchParameterId\">PatchParameterId</a>","synthetic":false,"types":["owl_midi::PatchParameterId"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
