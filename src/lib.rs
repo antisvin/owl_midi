@@ -160,6 +160,33 @@ impl From<PatchParameterId> for OpenWareMidiControl {
     }
 }
 
+impl TryFrom<OpenWareMidiControl> for PatchParameterId {
+    type Error = &'static str;
+
+    fn try_from(value: OpenWareMidiControl) -> Result<Self, Self::Error> {
+        match value {
+            OpenWareMidiControl::PATCH_PARAMETER_A => Ok(PatchParameterId::PARAMETER_A),
+            OpenWareMidiControl::PATCH_PARAMETER_B => Ok(PatchParameterId::PARAMETER_B),
+            OpenWareMidiControl::PATCH_PARAMETER_C => Ok(PatchParameterId::PARAMETER_C),
+            OpenWareMidiControl::PATCH_PARAMETER_D => Ok(PatchParameterId::PARAMETER_D),
+            OpenWareMidiControl::PATCH_PARAMETER_E => Ok(PatchParameterId::PARAMETER_E),
+            OpenWareMidiControl::PATCH_PARAMETER_F => Ok(PatchParameterId::PARAMETER_F),
+            OpenWareMidiControl::PATCH_PARAMETER_G => Ok(PatchParameterId::PARAMETER_G),
+            OpenWareMidiControl::PATCH_PARAMETER_H => Ok(PatchParameterId::PARAMETER_H),
+            _ => {
+                let int_val = value as isize;
+                let int_aa = OpenWareMidiControl::PATCH_PARAMETER_AA as isize;
+                let int_dh = OpenWareMidiControl::PATCH_PARAMETER_DH as isize;
+                if int_val >= int_aa && int_val <= int_dh {
+                    Ok(PatchParameterId::from(8 + int_val - int_aa))
+                } else {
+                    Err("No matching parameter")
+                }
+            }
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use crate::*;
@@ -194,6 +221,29 @@ mod tests {
             PatchParameterId::PARAMETER_AA
         );
         assert_eq!(PatchParameterId::PARAMETER_AA.string_id(), "AA");
+    }
+    #[test]
+    fn test_parameter_id_from_cc() {
+        assert_eq!(
+            PatchParameterId::try_from(OpenWareMidiControl::PATCH_PARAMETER_A),
+            Ok(PatchParameterId::PARAMETER_A)
+        );
+        assert_eq!(
+            PatchParameterId::try_from(OpenWareMidiControl::PATCH_PARAMETER_AA),
+            Ok(PatchParameterId::PARAMETER_AA)
+        );
+        assert_eq!(
+            PatchParameterId::try_from(OpenWareMidiControl::PATCH_PARAMETER_BA),
+            Ok(PatchParameterId::PARAMETER_BA)
+        );
+        assert_eq!(
+            PatchParameterId::try_from(OpenWareMidiControl::PATCH_PARAMETER_DH),
+            Ok(PatchParameterId::PARAMETER_DH)
+        );
+        assert_eq!(
+            PatchParameterId::try_from(OpenWareMidiControl::PATCH_BUTTON),
+            Err("No matching parameter")
+        );
     }
     #[test]
     fn test_button_id() {
